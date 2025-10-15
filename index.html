@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Railway UTS Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <!-- Auth Container -->
+    <div class="auth-container" id="authContainer">
+        <div class="auth-box" id="loginBox">
+            <div class="auth-header">
+                <img src="images/logo.png" alt="Indian Railways Logo" style="height: 60px; margin-bottom: 15px;">
+                <h2>Welcome to Indian Railways</h2>
+                <p>Login to book your tickets</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" class="form-control" id="loginEmail" required>
+                    <div class="error-message" id="loginEmailError">Please enter a valid email</div>
+                </div>
+                <div class="form-group input-icon">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                    <i class="fas fa-eye" id="toggleLoginPassword"></i>
+                    <div class="error-message" id="loginPasswordError">Password must be at least 6 characters</div>
+                </div>
+                <button type="submit" class="btn btn-orange" style="width: 100%;">Login</button>
+            </form>
+            <div class="auth-footer" style="text-align: center; margin-top: 20px;">
+                <p>Don't have an account? <button class="btn-link" id="showSignup">Sign Up</button></p>
+            </div>
+        </div>
+
+        <div class="auth-box" id="signupBox" style="display: none;">
+            <div class="auth-header">
+                <img src="images/logo.png" alt="Indian Railways Logo" style="height: 60px; margin-bottom: 15px;">
+                <h2>Create Account</h2>
+                <p>Sign up to book your railway tickets</p>
+            </div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" class="form-control" id="signupName" required>
+                    <div class="error-message" id="signupNameError">Please enter your full name</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" class="form-control" id="signupEmail" required>
+                    <div class="error-message" id="signupEmailError">Please enter a valid email</div>
+                </div>
+                <div class="form-group input-icon">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" class="form-control" id="signupPassword" required>
+                    <i class="fas fa-eye" id="toggleSignupPassword"></i>
+                    <div class="error-message" id="signupPasswordError">Password must be at least 6 characters</div>
+                </div>
+                <div class="form-group input-icon">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="signupConfirmPassword" required>
+                    <i class="fas fa-eye" id="toggleConfirmPassword"></i>
+                    <div class="error-message" id="signupConfirmPasswordError">Passwords don't match</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupMobile">Mobile Number</label>
+                    <input type="tel" class="form-control" id="signupMobile" required>
+                    <div class="error-message" id="signupMobileError">Please enter a valid 10-digit mobile number</div>
+                </div>
+                <button type="submit" class="btn btn-orange" style="width: 100%;">Sign Up</button>
+            </form>
+            <div class="auth-footer" style="text-align: center; margin-top: 20px;">
+                <p>Already have an account? <button class="btn-link" id="showLogin">Login</button></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container" id="appContainer">
+        <!-- Header -->
+        <header class="header">
+            <img src="images/logo.png" alt="Indian Railways Logo" class="logo">
+            <h1>Railway UTS</h1>
+            <nav class="nav-links">
+                <a href="#" id="homeLink"><i class="fas fa-home"></i> Home</a>
+                <a href="#" id="bookTicketLink"><i class="fas fa-ticket-alt"></i> Book Ticket</a>
+                <a href="#" id="myTicketsLink"><i class="fas fa-receipt"></i> My Tickets</a>
+                <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <div class="container">
+            <!-- Booking Form -->
+            <div class="booking-form" id="bookingFormSection">
+                <h2 class="form-title">Book Your Ticket</h2>
+                <form id="bookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fromStation">From Station</label>
+                            <input type="text" id="fromStation" class="form-control" placeholder="Delhi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="toStation">To Station</label>
+                            <input type="text" id="toStation" class="form-control" placeholder="Mumbai" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="journeyDate">Journey Date</label>
+                            <input type="date" id="journeyDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers">Number of Passengers</label>
+                            <select id="passengers" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trainType">Train Type</label>
+                            <select id="trainType" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="Mail/Express">Mail/Express</option>
+                                <option value="Superfast">Superfast</option>
+                                <option value="Ordinary">Ordinary</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="class">Class</label>
+                            <select id="class" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="2nd Sitting">2nd Sitting</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-orange">Continue to Payment</button>
+                </form>
+            </div>
+            
+            <!-- Payment Section -->
+            <div class="payment-section" id="paymentSection">
+                <h3>Payment Options</h3>
+                <div class="payment-option">
+                    <input type="radio" id="upi" name="payment" value="upi" checked>
+                    <label for="upi">UPI Payment</label>
+                    <div id="upiFields" style="margin-top: 10px;">
+                        <input type="text" id="upiId" class="form-control" placeholder="Enter UPI ID" style="margin-bottom: 10px;">
+                        <button id="payNow" class="btn btn-orange">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ticket Display -->
+            <div class="ticket-container" id="ticketContainer">
+                <div class="ticket-header">
+                    <h2>HAPPY JOURNEY</h2>
+                    <p>INDIAN RAILWAYS - UNRESERVED TICKET</p>
+                </div>
+                <div class="ticket-body">
+                    <div class="ticket-info">
+                        <div class="ticket-info-item">
+                            <small>FROM</small>
+                            <p id="ticketFrom">DELHI (NDLS)</p>
+                        </div>
+                        <div class="ticket-info-item">
+                            <small>TO</small>
+                            <p id="ticketTo">MUMBAI (CSTM)</p>
+                        </div>
+                        <div class="ticket-info-item">
+                            <small>DATE</small>
+                            <p id="ticketDate">25-JUN-2024</p>
+                        </div>
+                        <div class="ticket-info-item">
+                            <small>TRAIN TYPE</small>
+                            <p id="ticketTrainType">MAIL/EXPRESS</p>
+                        </div>
+                        <div class="ticket-info-item">
+                            <small>CLASS</small>
+                            <p id="ticketClass">2nd SITTING</p>
+                        </div>
+                        <div class="ticket-info-item">
+                            <small>PASSENGERS</small>
+                            <p id="ticketPassengers">2</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ticket-divider">
+                        <span>JOURNEY DETAILS</span>
+                    </div>
+                    
+                    <div class="ticket-info">
+                        <div class="ticket-info-item">
+                            <small>PNR NUMBER</small>
+                            <p id="ticketPnr">UTS78945612</p>
+                        </div>
+                        <div class="ticket-info-item">
+                            <small>BOOKING DATE</small>
+                            <p id="ticketBookingDate">20-JUN-2024</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ticket-qr">
+                        <img id="ticketQr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=UTS78945612" alt="QR Code">
+                        <p>SCAN QR CODE FOR VERIFICATION</p>
+                    </div>
+                </div>
+                <div class="ticket-footer">
+                    <h3>THE LEGITIMATE TICKET</h3>
+                    <p>BROWSING TERRY - SECTION 11.1-8.4</p>
+                    <div class="ticket-actions">
+                        <button class="btn btn-orange" onclick="printTicket()">PRINT TICKET</button>
+                        <button class="btn btn-white" onclick="saveTicket()">SAVE TICKET</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- My Tickets Section -->
+            <div class="my-tickets" id="myTickets">
+                <h2>My Tickets</h2>
+                <div class="ticket-list" id="ticketList">
+                    <!-- Tickets will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html> 
